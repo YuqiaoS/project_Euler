@@ -1,0 +1,33 @@
+vector<long long int> factors;
+
+// the recursive function that returns a vector of factors
+vector<long long int> factor(long long int n){
+	long long int d=2;
+	long long int p=1;
+
+	long long int inc_d=0;
+
+	while(n % d != 0){
+		d=pre_d+d;
+		++d;
+		p= n/d;
+	}
+	pre_d=d;
+	
+	factors.push_back(d);
+
+	if (d<p)
+		factor(p);
+
+	return factors;
+}
+
+int main()
+{
+	vector<long long int> factors = factor(600851475143);
+	for(vector<long long int>::iterator i = factors.begin(); i != factors.end(); ++i)
+		cout<< *i<< " ";
+
+	cin.get();
+	return 0;
+}

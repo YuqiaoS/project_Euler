@@ -1,0 +1,65 @@
+vector<int> factors(int n){
+	int d=2;
+	vector<int> f;
+	f.push_back(1);
+	int up_bound=(int)sqrt((double)n);
+	while(d<=up_bound){
+		if(n % d == 0){
+			f.push_back(d);
+			if(n/d!=d)
+			f.push_back(n/d);
+		}
+		++d;
+	}
+	return f;
+}
+
+int sum(vector<int> v){
+	int sum=0;
+	for(std::vector<int>::iterator j=v.begin();j!=v.end();++j)
+    sum += *j;
+	return sum;
+}
+int main()
+{
+	clock_t t0 =clock(),t1;
+	vector<int> abundant_num;
+	const int UPPER_LIM= 28123;
+
+	for(int i=1; i<UPPER_LIM; i++){
+		if(sum(factors(i))>i)
+			abundant_num.push_back(i);
+	}
+	
+	/*for(int i=0; i<factors(4).size(); i++){
+		cout<<factors(4)[i]<<endl;
+	}*/
+
+	
+	int num [UPPER_LIM]={0};
+	for(int i=1; i<UPPER_LIM; i++)
+		num[i]=i;
+
+	int n=0, half=UPPER_LIM/2, m, abundant_sum;
+	while(abundant_num[n]<=half){
+		m=n;
+		abundant_sum=abundant_num[m]+abundant_num[n];
+		while(abundant_sum<UPPER_LIM){
+			num[abundant_sum]=0;
+			m++;
+			abundant_sum=abundant_num[m]+abundant_num[n];
+		}
+		n++;
+	}
+		/*for(int i=0; i<10;i++){
+		cout<<abundant_num[i]<<" ";
+		}*/
+	vector<int> de_bundant;
+	int sum=0;
+	for(int i=1; i<UPPER_LIM; i++){
+		if(num[i]!=0){
+		sum+=num[i];
+		}
+	}
+
+	cout<<"sum is " <<sum;

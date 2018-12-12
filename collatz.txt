@@ -1,0 +1,22 @@
+int main()
+{
+	
+	int length, longest(0), collatz;
+	unsigned int t=0;
+	for(int i=1; i<1000000; i++){
+		length=0;
+		
+		t=i;
+		while(t!=1){
+			t%2==1 ? t=3*t+1 : t=t/2;
+			length++;
+		}
+		if(length>longest){
+			collatz=i;
+			longest=length;
+		}
+
+		
+	}
+
+	cout<<"Longest chain is produced by " << collatz<<endl;

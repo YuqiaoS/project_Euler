@@ -1,0 +1,94 @@
+const int digits=500;
+	int product [digits]={0}, unit_prod [digits]={0}, tens_prod [digits]={0};
+	product[0]=1;
+	int inc, highest_index(0), temp_prod,unit_high(0);
+
+	for(int f=2; f<10; f++){
+		inc=0;
+		for(int i=0;i<highest_index+1;i++){
+			temp_prod=(product[i]*f)+inc;
+			if(temp_prod<10){
+				product[i]=f*product[i]+inc;
+				inc=0;
+			}
+			else{							//digit goes over 10
+				product[i]=temp_prod%10;
+				inc = (int)temp_prod/10;
+				}
+			}
+		if(inc>0){
+			highest_index++;
+			product[highest_index]=inc;
+		}
+	
+	}		
+	
+	//unit_high= highest_index;
+	
+	for(int f =10; f<100; f++){
+		inc=0;
+		//loop for 2 digit multiplier (can be varied in the loop parameter)
+		for(int i=0;i<highest_index+1;i++){
+			temp_prod=product[i]*(f%10)+inc;
+			//cout<<unit_prod[i]<<" "<<f%10<<endl;
+			if(temp_prod<10){
+				unit_prod[i]=temp_prod;
+				inc=0;
+			}
+			else{							//digit goes over 10
+				unit_prod[i]=temp_prod%10;
+				inc = (int)temp_prod/10;
+				
+			}
+		}
+	
+		if(inc>0){
+			//highest_index++;
+			unit_prod[highest_index+1]=inc;
+		}
+
+
+		//cout<<"once" << product[unit_high+1] <<endl;
+		inc =0;
+		for(int i=0;i<highest_index+1;i++){
+			temp_prod=(product[i]*(f/10))+inc;
+			//cout<<product[i]<<" "<<i<<" "<<temp_prod<<endl;
+			if(temp_prod<10){
+				tens_prod[i+1]=temp_prod;
+				//cout<<temp_prod<<" "<<endl;
+				inc=0;
+			}
+			else{							//digit goes over 10
+				tens_prod[i+1]=temp_prod%10;		
+				inc = (int)temp_prod/10;
+				}
+		}
+		highest_index++;
+		//cout<<tens_prod[highest_index+1]<<" high "<<endl;
+		if(inc>0){
+			highest_index++;
+			tens_prod[highest_index]=inc;
+			//cout<<tens_prod[highest_index]<<" high "<<endl;
+		}
+
+		inc=0;
+		for(int i=0; i<highest_index+1; i++){
+			//cout<<unit_prod[i]<<" "<<tens_prod[i]<<endl;
+			
+			temp_prod=(unit_prod[i]+tens_prod[i])+inc;
+			product[i]=temp_prod%10;
+			inc=temp_prod/10;
+		}
+		if(inc>0){
+			highest_index++;
+			product[highest_index]=inc;
+		}
+	}
+	
+
+	int sum =0;
+	for(int i = 0; i<highest_index+1; ++i){
+		sum+=product[i];
+		cout<<product[i]<<" ";
+	}
+	cout<<"\n Sum of digits of 100! is "<<sum;

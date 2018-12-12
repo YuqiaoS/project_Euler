@@ -1,0 +1,18 @@
+	int pyth=0;
+	int k =1;
+
+	int i = 2;
+	int j = 2;
+	while(pyth!= k*k &&  i< (int)(1000)/2){
+		j =2;
+		while( pyth!= k*k && j<(int)(1000-i)/2){
+			k =1000-i-j;
+			pyth = i*i + j*j;
+			j++;
+		}
+		i++;
+	}
+	
+
+	//cout<<"The pythagorean triplet is : " << i-1 << " " << j-1 << " "<< k<< endl;
+	cout<<"Their product is "<< (i-1)*(j-1)*(k)<<endl;

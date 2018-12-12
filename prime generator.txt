@@ -1,0 +1,46 @@
+
+	long long int sum =5;
+	
+	vector<int> primes;
+	primes.push_back(2);
+	primes.push_back(3);
+
+
+	int n=0; 
+	for(int i = 4; i<2000000; i++){
+		int j =0;
+
+		int p =(int)sqrt((float)i);
+		while(primes[n]<p){
+		n++;
+		}
+		
+		while(i%primes[j]!=0  && j<= n){
+			j++;
+		}
+
+		if(j-1==n){
+			primes.push_back(i);
+			sum=i+sum;
+			//cout<<i<<" ";
+		}
+	}
+	/*
+	for(int i =2; i< 2000000; i++){
+		int j =2;
+		while( i%j!=0 && j<=(int)sqrt((float)i)){
+			j++;
+		}
+		if(j-1==(int)sqrt((float)i)){
+			sum = i+sum;
+			}
+		}
+	
+	*/
+
+
+	//unsigned long long int sum =0;
+	//for(vector<int>::iterator i = primes.begin(); i != primes.end(); ++i){
+		//sum = sum + *i;
+		
+//	}

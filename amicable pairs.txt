@@ -1,0 +1,52 @@
+vector<int> factors(int n){
+	int d=2;
+	vector<int> f;
+	f.push_back(1);
+	int up_bound=(int)sqrt((double)n);
+	while(d<=up_bound){
+		if(n % d == 0){
+			f.push_back(d);
+			f.push_back(n/d);
+		}
+		++d;
+	}
+	return f;
+}
+
+int sum(vector<int> v){
+	int sum=0;
+	for(std::vector<int>::iterator j=v.begin();j!=v.end();++j)
+    sum += *j;
+	return sum;
+}
+int main()
+{
+
+	int naturals[10000];
+	vector<int> amicable;
+	int s=0;
+
+	for(int i =0; i<10000; i++){
+		naturals[i]=i+1;
+	}
+
+	for(int i=0; i<10000; i++){
+		if(naturals[i] !=0){
+			s=sum(factors(naturals[i]));
+			//cout<<s<<" ";
+			if(sum(factors(s)) == naturals[i]&&s!=naturals[i]){
+				//cout<<s<<" ";
+				amicable.push_back(naturals[i]);
+				amicable.push_back(s);
+				naturals[s-1]=0;
+			}
+		}
+	}
+
+	int sum=0;
+	for(std::vector<int>::iterator j=amicable.begin();j!=amicable.end();++j){
+    cout<<*j<<" ";
+	sum+=*j;
+	}
+
+	cout<<"sum of all the amicable numbers under 10000 is " << sum<<endl;

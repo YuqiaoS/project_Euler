@@ -1,0 +1,39 @@
+vector<int> primes(float n){
+	vector<int> p;
+	p.push_back(2);
+
+	for(int i = 3; i<n; i++){
+		int j= 0;
+		while(i % p[j] != 0 && j< p.size()){
+			if(j+1 == p.size())
+				p.push_back(i);
+			j++;
+		}
+	}
+
+	return p;
+
+}
+
+int product(vector<int> m){
+	int product=1;
+	for(int i = 0; i< m.size(); i++){
+		product = m[i]*product;
+	}
+	return product;
+}
+
+//brute force starting from the product of primes below.
+int largestDividend(int n){
+	int x = product(primes(20));
+	int i = 4;
+	int j=0;
+	while(i<=n){
+		i=4;
+		++j;
+		while((x+j)%i == 0 && i <= n)
+			++i;
+	}
+
+	return x+j;
+}

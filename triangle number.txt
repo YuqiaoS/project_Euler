@@ -1,0 +1,77 @@
+int main()
+{
+	int half_div =0;
+	int tri=28, inc=7;
+
+	while(half_div<250){
+		half_div =0;
+		for(int i = 1; i<=(int)sqrt((float)tri); i++){
+			if(tri%i==0)
+				half_div++;
+		}		
+		inc++;
+		tri+=inc;
+	}
+	
+	cout<<"First triangle number to have over five hundred divisors: " 
+		<< tri-inc<<endl;
+}
+
+//new code:
+
+vector<long long int> factor(long long int n){
+	long long int d=2;
+	vector<long long int> factors;
+
+	while(d<=n){
+		while(n % d != 0){
+			++d;
+		}
+		factors.push_back(d);
+		n= n/d;
+	}
+
+	return factors;
+}
+
+int num_div(vector<long long int> v){
+	int power, product(1);
+	int l =1;
+
+	while(l<v.size()){
+		power=2;
+		while(l<v.size()&&v[l]==v[l-1]){
+			power++;
+			l++;
+		}
+		product=product*power;
+		if(l<v.size()&& v[l]!=v[l-1])
+			l++;
+	}
+	
+	if(v[v.size()-1]!=v[v.size()-2])
+		product = product*2;
+	
+	return product;
+}
+
+
+int main(){
+	clock_t t0 =clock(),t1;
+
+	int n_div =0;
+	int tri=28, inc=7;
+
+	while(n_div<500){
+		vector<long long int> f=factor((long long int)tri);
+		n_div = num_div(f);
+		//cout<<n_div<< " " << tri<< endl;
+		inc++;
+		tri+=inc;
+	}
+
+	cout<<"First triangle number to have over five hundred divisors: " 
+		<< tri-inc<<endl;
+	cin.get();
+	return 0;
+}

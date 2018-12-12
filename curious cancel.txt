@@ -1,0 +1,44 @@
+int main()
+{
+
+	float numerator,denominator;
+
+	vector<float> curious;
+	for(int tens=1;tens<10; tens++){
+		for(int unit=tens; unit<10; unit++){
+			numerator=tens*10+unit;
+			/*for(int t= unit+1; t<10; t++){
+				denominator=t*10+tens;
+				
+				if(numerator/denominator==(float)unit/t){
+					curious.push_back(numerator);
+					curious.push_back(denominator);
+					curious.push_back(0);
+				}
+			}*/
+			
+			for(int u= tens+1; u<10;u++){
+				denominator=10*unit+u;
+				if(numerator/denominator==(float)tens/u){
+					curious.push_back(numerator);
+					curious.push_back(denominator);
+					curious.push_back(0);
+				}
+				
+			}
+			/*
+			numerator = tens+unit*10;
+			for(int u= unit+1; u<10;u++){
+				denominator=10*u+unit;
+				if(numerator/denominator==(float)tens/u){
+					curious.push_back(numerator);
+					curious.push_back(denominator);
+					curious.push_back(0);
+				}
+			}*/
+		}
+	}
+
+	for(int i=0;i<curious.size();i++){
+		cout<<curious[i];
+	}
